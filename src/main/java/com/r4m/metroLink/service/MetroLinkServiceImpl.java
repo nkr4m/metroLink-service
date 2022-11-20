@@ -98,10 +98,10 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 		int i = to;
 		while(i != from) {
 			if(parent[i] == from) {
-				res = i + "->" + parent[i];
+				res = res + i + "->" + parent[i];
 				break;
 			}else{
-				res = i + "->";
+				res = res + i + "->";
 				i = parent[i];
 			}
 		}
