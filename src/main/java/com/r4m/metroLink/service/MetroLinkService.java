@@ -8,6 +8,6 @@ public interface MetroLinkService {
 	
 
 
-	public void dijkstraPath(Integer from, Integer to);
+	public String dijkstraPath(Integer from, Integer to);
 
 }

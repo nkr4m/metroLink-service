@@ -54,7 +54,7 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 		return adjL;
 	}
 	
-	public void dijkstraPath(Integer from, Integer to){
+	public String dijkstraPath(Integer from, Integer to){
 		List<List<LinkInfo>> adjL = mapBuilder.linkMap();
 //		List<List<Integer>> adjL = adjL();
 		
@@ -94,17 +94,19 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 		
 		
 		
-		
+		String res = "";
 		int i = to;
 		while(i != from) {
 			if(parent[i] == from) {
-				System.out.print(i + "->" + parent[i]);
+				res = i + "->" + parent[i];
 				break;
 			}else{
-				System.out.print(i + "->");
+				res = i + "->";
 				i = parent[i];
 			}
 		}
+		
+		return res;
 
 	}
 } 

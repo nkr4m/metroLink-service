@@ -19,14 +19,14 @@ public class MetroLinkController {
 	MetroLinkService metroLinkService; 
 	
 	@GetMapping("/{from}/{to}")
-	public void shortestDis(@PathVariable Integer from, @PathVariable Integer to) {
+	public ResponseEntity<String> shortestDis(@PathVariable Integer from, @PathVariable Integer to) {
 		final long startTime = System.currentTimeMillis();
 //		metroLinkService.shotestDistance(from, to);
-		metroLinkService.dijkstraPath(from, to);
+		String res =  metroLinkService.dijkstraPath(from, to);
 		final long endTime = System.currentTimeMillis();
 
 		System.out.println("Total execution time: " + (endTime - startTime));
-		
+		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 	
 
