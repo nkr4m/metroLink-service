@@ -4,11 +4,13 @@ public class LinkInfo {
 	private Integer stationCode;
 	private Integer eta; // seconds
 	private Boolean underConstruct;
+	private String line;
 	
-	public LinkInfo(Integer stationCode, Integer eta, Boolean underConstruct) {
+	public LinkInfo(Integer stationCode, Integer eta, Boolean underConstruct, String line) {
 		this.stationCode = stationCode;
 		this.eta = eta;
 		this.underConstruct = underConstruct;
+		this.line = line;
 	}
 
 	public Integer getStationCode() {
@@ -34,6 +36,16 @@ public class LinkInfo {
 	public void setUnderConstruct(Boolean underConstruct) {
 		this.underConstruct = underConstruct;
 	}
+
+	public String getLine() {
+		return line;
+	}
+
+	public void setLine(String line) {
+		this.line = line;
+	}
+	
+	
 
 	
 	
