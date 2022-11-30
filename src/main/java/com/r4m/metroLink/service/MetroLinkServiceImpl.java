@@ -20,6 +20,7 @@ import com.r4m.metroLink.builder.DijkstraNode;
 import com.r4m.metroLink.builder.LinkInfo;
 import com.r4m.metroLink.builder.MapBuilder;
 import com.r4m.metroLink.builder.MapNode;
+import com.r4m.metroLink.builder.StationDetails;
 import com.r4m.metroLink.dto.StationDto;
 
 @Service
@@ -128,11 +129,12 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 	@Override
 	public JSONArray fetchFrom() {
 		// TODO Auto-generated method stub
+		HashMap<Integer, StationDetails> map = mapBuilder.fetchStationInfo();
 		JSONArray res = new JSONArray();
-		for(int i=1; i<=309; i++) {
+		for(int i : map.keySet()) {
 			JSONObject obj = new JSONObject();
 			obj.put("stationCode", i);
-			obj.put("stationName", "NA");
+			obj.put("stationName", map.get(i).getStationName());
 			res.put(obj);
 		}
 		
@@ -141,8 +143,9 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 
 	@Override
 	public JSONArray fetchTo(Integer from) {
+		HashMap<Integer, StationDetails> map = mapBuilder.fetchStationInfo();
 		JSONArray res = new JSONArray();
-		for(int i=1; i<=309; i++) {
+		for(int i : map.keySet()) {
 			
 			if(i == from) {
 				continue;
@@ -150,7 +153,7 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 			
 			JSONObject obj = new JSONObject();
 			obj.put("stationCode", i);
-			obj.put("stationName", "NA");
+			obj.put("stationName", map.get(i).getStationName());
 			res.put(obj);
 		}
 		
@@ -255,7 +258,7 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 	@Override
 	public List<List<StationDto>> dfsAllPaths(Integer from, Integer to) {
 		
-		
+		HashMap<Integer, StationDetails> st = mapBuilder.fetchStationInfo();
 		List<List<LinkInfo>> adjL = mapBuilder.linkMap();
 		
 		boolean sameLine = false;
@@ -292,6 +295,7 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 					StationDto obj = new StationDto();
 					
 					obj.setStationCode(i);
+					obj.setStationName(st.get(i).getStationName());
 					temp.add(obj);
 				}
 				arr.add(temp);
@@ -331,6 +335,7 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 			for(Integer i : li) {
 				StationDto obj = new StationDto();
 				obj.setStationCode(i);
+				obj.setStationName(st.get(i).getStationName());
 				temp.add(obj);
 			}
 			arr.add(temp);
@@ -388,6 +393,17 @@ public class MetroLinkServiceImpl implements MetroLinkService{
 				 vis[currNode] = false;
 			 }
 		 }
+	}
+
+	@Override
+	public JSONObject fetchSt(Integer from, Integer to) {
+		// TODO Auto-generated method stub
+		HashMap<Integer, StationDetails> map = mapBuilder.fetchStationInfo();
+		JSONObject res = new JSONObject();
+		res.put("from", map.get(from) == null ? "N.A" : map.get(from).getStationName());
+		res.put("to", map.get(to) == null ? "N.A" : map.get(to).getStationName());
+		
+		return res;
 	}
 	
 	

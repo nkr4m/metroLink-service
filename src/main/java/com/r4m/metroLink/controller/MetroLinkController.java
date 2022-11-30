@@ -69,6 +69,13 @@ public class MetroLinkController {
 		return new ResponseEntity<Object>(data.toList(), HttpStatus.OK);	
 	}
 	
+	@GetMapping("fetchSt/{from}/{to}")
+	public ResponseEntity<Object> fetchSt(@PathVariable Integer from , @PathVariable Integer to){
+			
+			JSONObject data = metroLinkService.fetchSt(from, to);
+			return new ResponseEntity<Object>(data.toMap(), HttpStatus.OK);	
+		}
+	
 	
 
 }

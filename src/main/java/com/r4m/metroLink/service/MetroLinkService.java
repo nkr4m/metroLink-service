@@ -21,4 +21,6 @@ public interface MetroLinkService {
 
 	public JSONArray fetchTo(Integer from);
 
+	public JSONObject fetchSt(Integer from, Integer to);
+
 }
